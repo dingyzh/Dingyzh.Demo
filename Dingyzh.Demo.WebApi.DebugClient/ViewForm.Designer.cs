@@ -47,7 +47,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbForm = new System.Windows.Forms.GroupBox();
-            this.txtPost = new System.Windows.Forms.TextBox();
             this.gbQueryString = new System.Windows.Forms.GroupBox();
             this.gvQueryString = new System.Windows.Forms.DataGridView();
             this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,8 +57,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtUrlParams = new System.Windows.Forms.TextBox();
-            this.gbPostContentType = new System.Windows.Forms.GroupBox();
-            this.txtPostContentType = new System.Windows.Forms.TextBox();
+            this.gvForm = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -67,7 +67,7 @@
             this.gbQueryString.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvQueryString)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.gbPostContentType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -256,7 +256,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.gbPostContentType);
             this.groupBox1.Controls.Add(this.gbForm);
             this.groupBox1.Controls.Add(this.gbQueryString);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -269,22 +268,14 @@
             // 
             // gbForm
             // 
-            this.gbForm.Controls.Add(this.txtPost);
+            this.gbForm.Controls.Add(this.gvForm);
             this.gbForm.Location = new System.Drawing.Point(446, 20);
             this.gbForm.Name = "gbForm";
-            this.gbForm.Size = new System.Drawing.Size(454, 208);
+            this.gbForm.Size = new System.Drawing.Size(454, 267);
             this.gbForm.TabIndex = 2;
             this.gbForm.TabStop = false;
             this.gbForm.Text = "Post内容";
             this.gbForm.Visible = false;
-            // 
-            // txtPost
-            // 
-            this.txtPost.Location = new System.Drawing.Point(9, 17);
-            this.txtPost.Multiline = true;
-            this.txtPost.Name = "txtPost";
-            this.txtPost.Size = new System.Drawing.Size(439, 181);
-            this.txtPost.TabIndex = 0;
             // 
             // gbQueryString
             // 
@@ -382,24 +373,32 @@
             this.txtUrlParams.Size = new System.Drawing.Size(693, 21);
             this.txtUrlParams.TabIndex = 8;
             // 
-            // gbPostContentType
+            // gvForm
             // 
-            this.gbPostContentType.Controls.Add(this.txtPostContentType);
-            this.gbPostContentType.Location = new System.Drawing.Point(453, 235);
-            this.gbPostContentType.Name = "gbPostContentType";
-            this.gbPostContentType.Size = new System.Drawing.Size(441, 52);
-            this.gbPostContentType.TabIndex = 3;
-            this.gbPostContentType.TabStop = false;
-            this.gbPostContentType.Text = "Post内容类型";
-            this.gbPostContentType.Visible = false;
+            this.gvForm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvForm.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.gvForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvForm.Location = new System.Drawing.Point(3, 17);
+            this.gvForm.Name = "gvForm";
+            this.gvForm.RowTemplate.Height = 23;
+            this.gvForm.Size = new System.Drawing.Size(448, 247);
+            this.gvForm.TabIndex = 2;
             // 
-            // txtPostContentType
+            // dataGridViewTextBoxColumn1
             // 
-            this.txtPostContentType.Location = new System.Drawing.Point(7, 21);
-            this.txtPostContentType.Name = "txtPostContentType";
-            this.txtPostContentType.Size = new System.Drawing.Size(424, 21);
-            this.txtPostContentType.TabIndex = 0;
-            this.txtPostContentType.Text = "application/x-www-form-urlencoded";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Key";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 135;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 255;
             // 
             // ViewForm
             // 
@@ -419,13 +418,11 @@
             this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.gbForm.ResumeLayout(false);
-            this.gbForm.PerformLayout();
             this.gbQueryString.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvQueryString)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.gbPostContentType.ResumeLayout(false);
-            this.gbPostContentType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -461,9 +458,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.RadioButton rdCommonView;
         private System.Windows.Forms.RadioButton rdSignView;
-        private System.Windows.Forms.TextBox txtPost;
-        private System.Windows.Forms.GroupBox gbPostContentType;
-        private System.Windows.Forms.TextBox txtPostContentType;
+        private System.Windows.Forms.DataGridView gvForm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }
 

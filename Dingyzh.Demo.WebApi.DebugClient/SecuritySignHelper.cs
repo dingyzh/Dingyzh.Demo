@@ -21,9 +21,9 @@ namespace Dingyzh.Demo.WebApi.DebugClient
         /// <param name="getCollection">通过QueryString方式传递的键值集合,如果内部包含parnter或者sign，相关字段在组织原始字符串时将会被移除</param>
         /// <param name="parterId">合作账号</param>
         /// <param name="parterKey">合作Key</param>
-        /// <param name="postString">通过post方式传递的字符串，如果包含app_id或者api_sign，此部分不会被做特殊处理</param>
+        /// <param name="postCollection">通过Form方式传递的字符串，如果包含app_id或者api_sign，此部分不会被做特殊处理</param>
         /// <returns></returns>
-        public static string GetSecuritySign(this NameValueCollection getCollection, string parterId, string parterKey, string postString = null)
+        public static string GetSecuritySign(this NameValueCollection getCollection, string parterId, string parterKey, NameValueCollection postCollection = null)
         {
             if (string.IsNullOrWhiteSpace(parterId) || string.IsNullOrWhiteSpace(parterKey))
             {
@@ -38,10 +38,10 @@ namespace Dingyzh.Demo.WebApi.DebugClient
             dic.Add(SecuritySignHelper.ParterId, parterId);
             StringBuilder builder = new StringBuilder();
             SecuritySignHelper.FillStringBuilder(builder, dic);//将QueryString填入StringBuilder
-            if (!string.IsNullOrEmpty(postString))
-            {
-                builder.AppendFormat("{0}{1}", "&", postString);//将Post字符串填入StringBuilder
-            }
+
+            dic = SecuritySignHelper.GetSortedDictionary(postCollection);
+            SecuritySignHelper.FillStringBuilder(builder, dic);//将Form填入StringBuilder
+
             builder.AppendFormat("{0}{1}", "&", parterKey);//在尾部添加key
 
             return builder.ToString().GetMD5_32();//获取32位长度的Md5摘要

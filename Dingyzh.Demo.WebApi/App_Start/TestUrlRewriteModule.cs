@@ -59,6 +59,7 @@ namespace Dingyzh.Demo.WebApi.App_Start
         private bool ValidateSign(HttpApplication app)
         {
             NameValueCollection getCollection = app.Request.QueryString;
+            NameValueCollection postCollection = app.Request.Form;
 
             var client_time = getCollection["client_time"];
             var api_sign = getCollection["api_sign"];
@@ -67,12 +68,8 @@ namespace Dingyzh.Demo.WebApi.App_Start
             var action = getCollection["action"];
             var ver = getCollection["ver"];
 
-            var postStream = app.Request.InputStream;
-            var reader = new StreamReader(postStream, Encoding.UTF8);
-            var postString = reader.ReadToEnd();
-
             var parterKey = ParterHelper.GetKey(parter_id);
-            var validateSign = SecuritySignHelper.GetSecuritySign(getCollection, parter_id, parterKey, postString);
+            var validateSign = SecuritySignHelper.GetSecuritySign(getCollection, parter_id, parterKey, postCollection);
             return api_sign == validateSign;
         }
        
@@ -90,6 +87,7 @@ namespace Dingyzh.Demo.WebApi.App_Start
             {
                 return string.Equals(k, "action", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(k, "ver", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(k, "client_time", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(k, SecuritySignHelper.ApiSign, StringComparison.OrdinalIgnoreCase)
                 || string.Equals(k, SecuritySignHelper.ParterId, StringComparison.OrdinalIgnoreCase);
             });

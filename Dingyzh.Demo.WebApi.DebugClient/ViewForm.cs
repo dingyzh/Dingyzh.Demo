@@ -33,13 +33,13 @@ namespace Dingyzh.Demo.WebApi.DebugClient
                 NameValueCollection getCollection = this.GetNameValueCollection(this.gvQueryString);
                 if (this.rdSignView.Checked)
                 {
-                    //NameValueCollection postCollection = null;
-                    //if (this.gbForm.Visible)
-                    //{
-                    //    postCollection = this.GetNameValueCollection(this.gvForm);
-                    //}
+                    NameValueCollection postCollection = null;
+                    if (this.gbForm.Visible)
+                    {
+                        postCollection = this.GetNameValueCollection(this.gvForm);
+                    }
 
-                    this.txtSign.Text = getCollection.GetSecuritySign(this.txtPartner.Text.Trim(), this.txtPartnerKey.Text.Trim(), this.txtPost.Text);
+                    this.txtSign.Text = getCollection.GetSecuritySign(this.txtPartner.Text.Trim(), this.txtPartnerKey.Text.Trim(), postCollection);
                 }
                 this.SetUrlParams(getCollection);
             }
@@ -120,15 +120,13 @@ namespace Dingyzh.Demo.WebApi.DebugClient
                     {
                         case "POST":
                         case "PUT":
-                            //var postCollection = this.GetNameValueCollection(this.gvForm);
-                            //var dic = new Dictionary<string, string>();
-                            //for (int i = 0; i < postCollection.Count; i++)
-                            //{
-                            //    dic.Add(postCollection.GetKey(i), postCollection[i]);
-                            //}
-                            //HttpContent httpContent = new FormUrlEncodedContent(dic);
-                            var postString = this.txtPost.Text;
-                            HttpContent httpContent = new StringContent(postString, Encoding.UTF8, txtPostContentType.Text);
+                            var postCollection = this.GetNameValueCollection(this.gvForm);
+                            var dic = new Dictionary<string, string>();
+                            for (int i = 0; i < postCollection.Count; i++)
+                            {
+                                dic.Add(postCollection.GetKey(i), postCollection[i]);
+                            }
+                            HttpContent httpContent = new FormUrlEncodedContent(dic);
                             //ContentType必须是application/x-www-form-urlencoded，否则服务端接收不到该数据
                             //httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/" + this.cmbContentType.Text.ToLower());
                             if (this.cmbMethod.Text == "POST")
@@ -169,7 +167,6 @@ namespace Dingyzh.Demo.WebApi.DebugClient
                 this.cmbMethod.Text = method;
             }
             this.gbForm.Visible = this.cmbMethod.Text == "POST" || this.cmbMethod.Text == "PUT";
-            this.gbPostContentType.Visible = this.cmbMethod.Text == "POST" || this.cmbMethod.Text == "PUT";
         }
 
         private void rdView_CheckedChanged(object sender, EventArgs e)

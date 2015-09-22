@@ -63,13 +63,13 @@ namespace Dingyzh.Demo.WebApi.App_Start
 
             var client_time = getCollection["client_time"];
             var api_sign = getCollection["api_sign"];
-            var parter_id = getCollection["parter_id"];
+            var partner_id = getCollection["partner_id"];
             var debug = getCollection["debug"];
             var action = getCollection["action"];
             var ver = getCollection["ver"];
 
-            var parterKey = ParterHelper.GetKey(parter_id);
-            var validateSign = SecuritySignHelper.GetSecuritySign(getCollection, parter_id, parterKey, postCollection);
+            var parterKey = ParterHelper.GetKey(partner_id);
+            var validateSign = SecuritySignHelper.GetSecuritySign(getCollection, partner_id, parterKey, postCollection);
             return api_sign == validateSign;
         }
        
@@ -89,7 +89,7 @@ namespace Dingyzh.Demo.WebApi.App_Start
                 || string.Equals(k, "ver", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(k, "client_time", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(k, SecuritySignHelper.ApiSign, StringComparison.OrdinalIgnoreCase)
-                || string.Equals(k, SecuritySignHelper.ParterId, StringComparison.OrdinalIgnoreCase);
+                || string.Equals(k, SecuritySignHelper.PartnerId, StringComparison.OrdinalIgnoreCase);
             });
             StringBuilder builder = new StringBuilder();
             SecuritySignHelper.FillStringBuilder(builder, destDic);

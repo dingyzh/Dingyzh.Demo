@@ -56,11 +56,11 @@ namespace Dingyzh.Demo.WebApi.DebugClient
             {
                 try
                 {
-                    getCollection.Add(SecuritySignHelper.ParterId, this.txtPartner.Text.Trim());
+                    getCollection.Add(SecuritySignHelper.PartnerId, this.txtPartner.Text.Trim());
                 }
                 catch
                 {
-                    getCollection[SecuritySignHelper.ParterId] = this.txtPartner.Text.Trim();
+                    getCollection[SecuritySignHelper.PartnerId] = this.txtPartner.Text.Trim();
                 }
                 try
                 {

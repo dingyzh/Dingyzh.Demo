@@ -13,29 +13,29 @@ namespace Dingyzh.Demo.WebApi.DebugClient
     /// </summary>
     public static class SecuritySignHelper
     {
-        public const string ParterId = "parter_id";
+        public const string PartnerId = "partner_id";
         public const string ApiSign = "api_sign";
         /// <summary>
         /// 获取防篡改签名，组织原始字符串的方式为：先get后post，该签名要求partner在加密时为全小写，同时该方法隐含要求parnter和sign必须通过QueryString方式传递
         /// </summary>
         /// <param name="getCollection">通过QueryString方式传递的键值集合,如果内部包含parnter或者sign，相关字段在组织原始字符串时将会被移除</param>
-        /// <param name="parterId">合作账号</param>
+        /// <param name="partnerId">合作账号</param>
         /// <param name="parterKey">合作Key</param>
         /// <param name="postCollection">通过Form方式传递的字符串，如果包含app_id或者api_sign，此部分不会被做特殊处理</param>
         /// <returns></returns>
-        public static string GetSecuritySign(this NameValueCollection getCollection, string parterId, string parterKey, NameValueCollection postCollection = null)
+        public static string GetSecuritySign(this NameValueCollection getCollection, string partnerId, string parterKey, NameValueCollection postCollection = null)
         {
-            if (string.IsNullOrWhiteSpace(parterId) || string.IsNullOrWhiteSpace(parterKey))
+            if (string.IsNullOrWhiteSpace(partnerId) || string.IsNullOrWhiteSpace(parterKey))
             {
                 throw new ArgumentNullException();
             }
             var dic = SecuritySignHelper.GetSortedDictionary(getCollection,
                 (k) =>
                 {//过滤partner及sign
-                    return string.Equals(k, SecuritySignHelper.ParterId, StringComparison.OrdinalIgnoreCase)||
+                    return string.Equals(k, SecuritySignHelper.PartnerId, StringComparison.OrdinalIgnoreCase)||
                     string.Equals(k, SecuritySignHelper.ApiSign, StringComparison.OrdinalIgnoreCase);
                 });
-            dic.Add(SecuritySignHelper.ParterId, parterId);
+            dic.Add(SecuritySignHelper.PartnerId, partnerId);
             StringBuilder builder = new StringBuilder();
             SecuritySignHelper.FillStringBuilder(builder, dic);//将QueryString填入StringBuilder
 
